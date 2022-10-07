@@ -1,0 +1,159 @@
+:root{
+    --background-color: #ffffff;
+    --primary-font-color: #000000;
+    --seconadry-font-color: #a6a6a6;
+    --divider-color: #595959;
+
+    --font-extralight: 200;
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-bold: 700;
+
+    --font-h1: 24px;
+    --font-h2: 14px;
+    --font-h3: 12px;
+    --font-p: 12px;
+    --icons: 18px;
+
+    --margin-1: 5px;
+    --margin-2: 10px;
+    --margin-3: 16px;
+}
+
+html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Rubik', sans-serif;
+    margin: 50px 20px;
+    background-color: var(--background-color);
+}
+
+h1{
+    font-size: var(--font-h1);
+    color: var(--primary-font-color);
+    margin: 0;
+}
+
+h2 {
+    font-size: var(--font-h2);
+    color: var(--primary-font-color);
+    margin: 0;
+    font-weight: var(--font-light);
+}
+
+h3 {
+    font-size: var(--font-h3);
+    color: var(--secondary-font-color);
+    margin: 0;
+}
+
+p {
+    font-size: var(--font-p);
+    color: var(--primary-font-color);
+    margin: 0;
+    font-weight: var(--font-light);
+}
+
+strong{
+    font-weight: var(--font-medium);
+}
+
+.font-extralight {
+    font-weight: var(--font-extralight);
+}
+
+.font-light{
+    font-weight: var(--font-light);
+}
+
+.font-regular{
+    font-weight: var(--font-regular);
+}
+
+.font-medium {
+    font-weight: var(--font-medium);
+}
+
+.font-bold {
+    font-weight: var(--font-bold);
+}
+
+.divider{
+    height: 1px;
+    width: 100%;
+    background-color: var(--divider-color);
+    border-radius: 1px;
+    margin: var(--margin-3) 0px;
+}
+
+.informations{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: var(--margin-3) 0px;
+}
+
+.left-box{
+    width: 26%;
+    /* background-color: aquamarine; */
+}
+
+.right-box{
+    /* width: 70%; */
+    margin-left: 30px;
+    flex: 1;
+    /* background-color: aqua; */
+}
+
+.main-photo{
+    width: 100%;
+}
+
+.blank-p{
+    height: var(--font-p);
+    width: 100%;
+    background-color: transparent;
+}
+
+.font-center{
+    text-align: center;
+    width: 100%;
+    margin: var(--margin-1) 0px;
+}
+
+.heading{
+    width: 100%;
+    font-size: var(--font-h2);
+    font-weight: var(--font-medium);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: var(--margin-2) 0px;
+}
+
+.heading span{
+    margin-right: var(--margin-2);
+    font-size: var(--icons);
+}
+
+ul{
+    list-style: outside;
+    list-style-type: disc;
+    font-size: var(--font-p);
+    margin: var(--margin-3) 0px;
+}
+
+.generate-button{
+    padding: 10px 20px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+
+

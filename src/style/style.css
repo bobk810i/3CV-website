@@ -480,9 +480,10 @@ main{
 
 .section-buttons-box{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 98%;
+    /* margin-left: calc(3vw + 12vw + 0.8vw); */
 }
 
 .input-middle-box{

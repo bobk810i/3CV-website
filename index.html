@@ -33,10 +33,11 @@
                 <div class="podstawowe-lewo">
                     <h1>Zdjęcie</h1>
                     <div class="photo-container">
-                        <img src="src/graphics/sample-photo.jpg">
+                        <img src="src/graphics/sample-photo.jpg" id="zdjecie">
                         <div class="photo-buttons-container">
-                            <button class="btn">Wczytaj</button>
-                            <button class="btn-outline">Usuń</button>
+                            <button class="btn" id="zdjecie-upload">Wczytaj</button>
+                            <button class="btn-outline" id="zdjecie-delete">Usuń</button>
+                            <input type="file" name="zdjecie-input" id="zdjecie-input" style="display: none;" accept="image/jpeg, image/png, image/jpg">
                         </div>
                     </div>
                 </div>
@@ -95,21 +96,38 @@
                 <button class="btn-outline section-icon-btn" onmouseover="hoverOnIconButton(this.id)">Ikona ▼</button>
                 <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
             </div>
-            <div class="section-content-box-flex">
-                <input class="short-input" type="text" name="" id="" placeholder="data">
-                <div class="input-middle-box">
-                    <input type="text" name="" id="" placeholder="nazwa">
-                    <input type="text" name="" id="" placeholder="firma">
-                    <textarea name="" id="" cols="30" rows="5" placeholder="opis"></textarea>
-                    <div class="section-buttons-box">
-                        <button class="btn-secondary add-section-btn">Dodaj +</button>
-                        <button class="btn-outline-secondary del-section-btn">Usuń</button>
+            <div class="section-list-content">
+                <div class="section-content-box-flex">
+                    <input class="short-input" type="text" name="" id="" placeholder="data">
+                    <div class="input-middle-box">
+                        <input type="text" name="" id="" placeholder="nazwa">
+                        <input type="text" name="" id="" placeholder="firma">
+                        <textarea name="" id="" cols="30" rows="5" placeholder="opis"></textarea>
+                        <div class="section-buttons-box">
+                            <button class="btn-secondary add-section-btn" onclick="addSectionWydarzenia(this)">Dodaj +</button>
+                            <button class="btn-outline-secondary del-section-btn" onclick="deleteSectionWydarzenia(this)">Usuń</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="divider"></div>
         </li>
     </template>
+        
+    <template id="section_wydarzenia-tmp-option">
+        <div class="section-content-box-flex">
+            <input class="short-input" type="text" name="" id="" placeholder="data">
+            <div class="input-middle-box">
+                <input type="text" name="" id="" placeholder="nazwa">
+                <input type="text" name="" id="" placeholder="firma">
+                <textarea name="" id="" cols="30" rows="5" placeholder="opis"></textarea>
+                <div class="section-buttons-box">
+                    <button class="btn-secondary add-section-btn" onclick="addSectionWydarzenia(this)">Dodaj +</button>
+                    <button class="btn-outline-secondary del-section-btn" onclick="deleteSectionWydarzenia(this)">Usuń</button>
+                </div>
+            </div>
+        </div>
+    </template>    
 
     <template id="section_lista-tmp">
         <li class="section">
@@ -121,17 +139,26 @@
             </div>
             <div class="section-content-box">
                 <div class="section-inside-list">
-                    <!-- może z tego template?? -->
                     <h1 class="short-input list-h1">-</h1>
                     <div class="input-middle-box">
                         <input type="text" name="" id="" placeholder="opis">
                     </div>
-                    <button class="btn-secondary"><span class=" material-symbols-outlined">delete</span></button>
+                    <button class="btn-secondary" onclick="deleteSectionLista(this)"><span class=" material-symbols-outlined">delete</span></button>
                 </div>
-                <button class="btn-secondary">Dodaj +</button>
+                <button class="btn-secondary add-btn" onclick="addSectionLista(this)">Dodaj +</button>
             </div>
             <div class="divider"></div>
         </li>
+    </template>
+
+    <template id="section_lista-tmp-option">
+        <div class="section-inside-list">
+            <h1 class="short-input list-h1">-</h1>
+            <div class="input-middle-box">
+                <input type="text" name="" id="" placeholder="opis">
+            </div>
+            <button class="btn-secondary" onclick="deleteSectionLista(this)"><span class=" material-symbols-outlined">delete</span></button>
+        </div>
     </template>
 
     <template id="section_listaOpis-tmp">
@@ -144,18 +171,28 @@
             </div>
             <div class="section-content-box">
                 <div class="section-inside-list">
-                    <!-- może z tego template?? -->
                     <input class="short-input" type="text" name="" id="" placeholder="nazwa">
                     <h1 style="margin: 0 20px;">-</h1>
                     <div class="input-middle-box">
                         <input type="text" name="" id="" placeholder="opis">
                     </div>
-                    <button class="btn-secondary delete-btn"><span class="material-symbols-outlined">delete</span></button>
+                    <button class="btn-secondary delete-btn" onclick="deleteSectionListaOpis(this)"><span class="material-symbols-outlined">delete</span></button>
                 </div>
-                <button class="btn-secondary">Dodaj +</button>
+                <button class="btn-secondary add-btn" onclick="addSectionListaOpis(this)">Dodaj +</button>
             </div>
             <div class="divider"></div>
         </li>
+    </template>
+
+    <template id="section_listaOpis-tmp-option">
+        <div class="section-inside-list">
+            <input class="short-input" type="text" name="" id="" placeholder="nazwa">
+            <h1 style="margin: 0 20px;">-</h1>
+            <div class="input-middle-box">
+                <input type="text" name="" id="" placeholder="opis">
+            </div>
+            <button class="btn-secondary delete-btn" onclick="deleteSectionListaOpis(this)"><span class="material-symbols-outlined">delete</span></button>
+        </div>
     </template>
 
     <template id="section_tekst-tmp">

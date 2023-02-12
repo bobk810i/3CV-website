@@ -8,26 +8,32 @@ const sortableOptions = {
 
 var sortable = Sortable.create(sortableList, sortableOptions);
 
-// Tooltips
+// Photo upload
+const photoFileInput = document.getElementById('zdjecie-input');
+const photoFrame = document.getElementById('zdjecie');
+const uploadBtn = document.getElementById('zdjecie-upload');
+const deleteBtn = document.getElementById('zdjecie-delete');
 
-/* 
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">school</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">business_center</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">build</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">edit</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">import_contacts</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">speaker_notes</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">add_circle</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">arrow_forward_ios</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">star</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">check_box_outline_blank</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">radio_button_checked</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">radio_button_unchecked</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">apps</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">arrow_circle_right</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">public</span>
-<span onclick="iconsButtonClick(this)" class="material-symbols-outlined">person</span>
-*/
+uploadBtn.addEventListener('click', ()=>{ // button input trigger
+  photoFileInput.click();
+})
+
+photoFileInput.addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.addEventListener('load', ()=>{
+      photoFrame.setAttribute('src', reader.result);
+    })
+    reader.readAsDataURL(file);
+  }
+})
+
+deleteBtn.addEventListener('click', ()=>{
+  photoFrame.setAttribute('src', 'src/graphics/sample-photo.jpg');
+})
+
+// Tooltips
 
 const iconTooltipContent = '<div class="tooltip-icons-grid"> <span onclick="iconsButtonClick(this)" class="material-symbols-outlined">school</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">business_center</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">build</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">edit</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">import_contacts</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">speaker_notes</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">add_circle</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">arrow_forward_ios</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">star</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">check_box_outline_blank</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">radio_button_checked</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">radio_button_unchecked</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">apps</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">arrow_circle_right</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">public</span><span onclick="iconsButtonClick(this)" class="material-symbols-outlined">person</span> </div>';
 const iconsTippyConstructor = {
@@ -92,10 +98,12 @@ function createSelectionFeature(temp){
   var uniqueID = uniqueId();
   var uniqueID_icons = uniqueId();
   const mainNode = template.querySelector(".section");
-  const iconsButton = template.querySelector(".section-icon-btn");
+  if(template.querySelector(".section-icon-btn") != null){
+    const iconsButton = template.querySelector(".section-icon-btn");
+    iconsButton.id = uniqueID_icons;
+    tippy(iconsButton, iconsTippyConstructor);
+  }
   mainNode.id = uniqueID;
-  iconsButton.id = uniqueID_icons;
-  tippy(iconsButton, iconsTippyConstructor);
   sortableList.appendChild(template);
 }
 
@@ -140,6 +148,71 @@ function deletePodstawowe(element){
   let toDelete = document.getElementById(element.parentNode.id);
   podstawoweList.removeChild(toDelete);
 }
+
+// Select option - wydarzenie
+function addSectionWydarzenia(element){
+  let parentId = element.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+  const chosenSection = document.getElementById(parentId);
+  const sectionList = chosenSection.querySelector('.section-list-content');
+  const temp = document.getElementById('section_wydarzenia-tmp-option').content;
+  let template = document.importNode(temp, true);
+
+  sectionList.appendChild(template);
+}
+
+function deleteSectionWydarzenia(element){
+  const deletedBox = element.parentNode.parentNode.parentNode;
+  const deletedList = element.parentNode.parentNode.parentNode.parentNode;
+
+  if(deletedList.querySelectorAll('.section-content-box-flex').length != 1){ // 1 window have to remain
+    deletedList.removeChild(deletedBox);
+  }
+}
+
+// Select option - lista
+function addSectionLista(element){
+  let parentId = element.parentNode.parentNode.id;
+  const chosenSection = document.getElementById(parentId);
+  const sectionList = chosenSection.querySelector('.section-content-box');
+  const sectionListBtn = sectionList.querySelector('.add-btn');
+  const temp = document.getElementById('section_lista-tmp-option').content;
+  let template = document.importNode(temp, true);
+
+  sectionListBtn.before(template);
+}
+
+function deleteSectionLista(element){
+  let parentId = element.parentNode.parentNode.parentNode.id;
+  const chosenSection = document.getElementById(parentId);
+  const sectionList = chosenSection.querySelector('.section-content-box');
+
+  if(sectionList.querySelectorAll('.section-inside-list').length != 1){ // 1 window have to remain
+    sectionList.removeChild(element.parentNode);
+  }
+}
+
+// Select option - lista z opisem
+function addSectionListaOpis(element){
+  let parentId = element.parentNode.parentNode.id;
+  const chosenSection = document.getElementById(parentId);
+  const sectionList = chosenSection.querySelector('.section-content-box');
+  const sectionListBtn = sectionList.querySelector('.add-btn');
+  const temp = document.getElementById('section_listaOpis-tmp-option').content;
+  let template = document.importNode(temp, true);
+
+  sectionListBtn.before(template);
+}
+
+function deleteSectionListaOpis(element){
+  let parentId = element.parentNode.parentNode.parentNode.id;
+  const chosenSection = document.getElementById(parentId);
+  const sectionList = chosenSection.querySelector('.section-content-box');
+
+  if(sectionList.querySelectorAll('.section-inside-list').length != 1){ // 1 window have to remain
+    sectionList.removeChild(element.parentNode);
+  }
+}
+
 
 // Export PDF
 var options = {

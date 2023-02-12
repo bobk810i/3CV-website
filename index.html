@@ -11,6 +11,8 @@
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="icon" type="image/x-icon" href="/src/graphics/logo-bez napisu.svg">
     <title>3CV Kreator</title>
 </head>
@@ -18,10 +20,200 @@
     <header>
         <img src="/src/graphics/logo-napis.svg" alt="main-logo">
         <div class="header-buttons-box">
-            <button class="btn-outline">Button</button>
+            <button class="btn-outline-secondary">Wczytaj CV</button>
+            <button class="btn-outline">Zapisz CV</button>
         </div>
     </header>
-    <!-- <div id="export-pdf">
+    <main>
+        <div class="left-panel">
+            <h1>Konfiguracja</h1>
+        </div>
+        <div class="right-panel">
+            <div class="right-header">
+                <div class="podstawowe-lewo">
+                    <h1>Zdjęcie</h1>
+                    <div class="photo-container">
+                        <img src="src/graphics/sample-photo.jpg">
+                        <div class="photo-buttons-container">
+                            <button class="btn">Wczytaj</button>
+                            <button class="btn-outline">Usuń</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="podstawowe-prawo">
+                    <h1>Informacje podstawowe</h1>
+                    <div class="podstawowe-input-box">
+                        <input class="sm-input" type="text" name="" id="" value="Imię i nazwisko" disabled>
+                        <input class="big-input" type="text" name="" id="">
+                    </div>
+                    <div class="podstawowe-input-box">
+                        <input class="sm-input" type="text" name="" id="" value="Email" disabled>
+                        <input class="big-input" type="text" name="" id="">
+                    </div>
+                    <div class="podstawowe-input-box">
+                        <input class="sm-input" type="text" name="" id="" value="Telefon" disabled>
+                        <input class="big-input" type="text" name="" id="">
+                    </div>
+                    <div class="podstawowe-input-box">
+                        <input class="sm-input" type="text" name="" id="" value="Adres" disabled>
+                        <input class="big-input" type="text" name="" id="">
+                    </div>
+                    <div class="podstawowe-add-input-box">
+
+                        <template id="podstawowe-input-tmp">
+                            <div class="podstawowe-input-box">
+                                <input class="sm-input" type="text" name="" id="" value="">
+                                <input class="big-input" type="text" name="" id="">
+                                <button class="btn-secondary delete-btn" onclick="deletePodstawowe(this)"><span class="material-symbols-outlined">delete</span></button>
+                            </div>
+                        </template>
+
+                    </div>
+                    <button class="btn-secondary" id="podstawowe_add_btn">Dodaj  +</button>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <ul class="sections-list" id="sections-list-sortable">               
+                <!-- place for templates -->
+                
+
+            </ul>
+            <button class="btn main-add-btn add-section-main-btn">Dodaj sekcję ▼</button>
+        </div>
+    </main>
+    <footer>
+        <p class="font-regular">Projekt i wykonanie strony - <a class="font-semibold" target="_blank" href="https://jkolodynski-dev.netlify.app/">Jakub Kołodyński</a></p>
+        <p class="font-extralight">© Copyright 2022 Jakub Kołodyński - Wszystkie prawa zastrzeżone/All Rights reserved</p>
+    </footer>
+
+    <!-- Sections INSIDE templates -->
+<template id="section_wydarzenia-tmp">
+        <li class="section">
+            <div class="section-header-box">
+                <span class="material-symbols-outlined sortable-handle">drag_handle</span>
+                <input type="text" name="" id="" placeholder="Nazwa sekcji">
+                <button class="btn-outline section-icon-btn" onmouseover="hoverOnIconButton(this.id)">Ikona ▼</button>
+                <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
+            </div>
+            <div class="section-content-box-flex">
+                <input class="short-input" type="text" name="" id="" placeholder="data">
+                <div class="input-middle-box">
+                    <input type="text" name="" id="" placeholder="nazwa">
+                    <input type="text" name="" id="" placeholder="firma">
+                    <textarea name="" id="" cols="30" rows="5" placeholder="opis"></textarea>
+                    <div class="section-buttons-box">
+                        <button class="btn-secondary add-section-btn">Dodaj +</button>
+                        <button class="btn-outline-secondary del-section-btn">Usuń</button>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+        </li>
+    </template>
+
+    <template id="section_lista-tmp">
+        <li class="section">
+            <div class="section-header-box">
+                <span class="material-symbols-outlined sortable-handle">drag_handle</span>
+                <input type="text" name="" id="" placeholder="Nazwa sekcji">
+                <button class="btn-outline section-icon-btn" onmouseover="hoverOnIconButton(this.id)">Ikona ▼</button>
+                <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
+            </div>
+            <div class="section-content-box">
+                <div class="section-inside-list">
+                    <!-- może z tego template?? -->
+                    <h1 class="short-input list-h1">-</h1>
+                    <div class="input-middle-box">
+                        <input type="text" name="" id="" placeholder="opis">
+                    </div>
+                    <button class="btn-secondary"><span class=" material-symbols-outlined">delete</span></button>
+                </div>
+                <button class="btn-secondary">Dodaj +</button>
+            </div>
+            <div class="divider"></div>
+        </li>
+    </template>
+
+    <template id="section_listaOpis-tmp">
+        <li class="section">
+            <div class="section-header-box">
+                <span class="material-symbols-outlined sortable-handle">drag_handle</span>
+                <input type="text" name="" id="" placeholder="Nazwa sekcji">
+                <button class="btn-outline section-icon-btn" onmouseover="hoverOnIconButton(this.id)">Ikona ▼</button>
+                <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
+            </div>
+            <div class="section-content-box">
+                <div class="section-inside-list">
+                    <!-- może z tego template?? -->
+                    <input class="short-input" type="text" name="" id="" placeholder="nazwa">
+                    <h1 style="margin: 0 20px;">-</h1>
+                    <div class="input-middle-box">
+                        <input type="text" name="" id="" placeholder="opis">
+                    </div>
+                    <button class="btn-secondary delete-btn"><span class="material-symbols-outlined">delete</span></button>
+                </div>
+                <button class="btn-secondary">Dodaj +</button>
+            </div>
+            <div class="divider"></div>
+        </li>
+    </template>
+
+    <template id="section_tekst-tmp">
+        <li class="section">
+            <div class="section-header-box">
+                <span class="material-symbols-outlined sortable-handle">drag_handle</span>
+                <input type="text" name="" id="" placeholder="Nazwa sekcji">
+                <button class="btn-outline section-icon-btn" onmouseover="hoverOnIconButton(this.id)">Ikona ▼</button>
+                <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
+            </div>
+            <div class="section-content-box">
+                <div class="section-inside-list">
+                    <h1 class="short-input list-h1"></h1>
+                    <div class="input-middle-box">
+                        <textarea name="" id="" cols="30" rows="5" placeholder="opis"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+        </li>
+    </template>
+
+    <template id="section_rodo-tmp">
+        <li class="section">
+            <div class="section-header-box">
+                <span class="material-symbols-outlined sortable-handle">drag_handle</span>
+                <h1 style="flex:1;">Klauzula RODO</h1>
+                <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
+            </div>
+            <div class="section-content-box">
+                <div class="section-inside-list">
+                    <h1 class="short-input list-h1"></h1>
+                    <div class="input-middle-box">
+                        <textarea name="rodo-text" id="rodo-text" cols="30" rows="5" placeholder="klauzula RODO">
+        Zgadzam się na przetwarzanie danych osobowych zawartych w moim CV, dla celów prowadzenia rekrutacji. Dodatkowo zgadzam się na przetwarzanie przez pracodawcę danych osobowych zawartych w moim zgłoszeniu rekrutacyjnym dla celów przyszłych rekrutacji.
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+        </li>
+    </template>
+
+    <template id="section_podzial-tmp">
+        <li class="section">
+            <div class="section-header-box">
+                <span class="material-symbols-outlined sortable-handle">drag_handle</span>
+                <h3>Podział strony</h3>
+                <div class="inline-divider"></div>
+                <button class="btn" onclick="deleteSection(this)">Usuń sekcję</button>
+            </div>
+            <div class="divider"></div>
+        </li>
+    </template>
+
+
+    <!-- CV ZONE!!!! -->
+    <div id="export-pdf">
         <div class="informations">
             <div class="left-box">
                 <img class="main-photo" src="src/graphics/sample-photo.jpg">
@@ -143,11 +335,19 @@
 
     </div>
 
-    <button class="generate-button" id="generate-pdf" onclick="generatePdf()">Generate PDF</button> -->
+    <!-- <button class="generate-button" id="generate-pdf" onclick="generatePdf()">Generate PDF</button> -->
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"
+        integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"
+        integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="src/script/main.js"></script>
 </body>
 </html>
